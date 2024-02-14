@@ -33,67 +33,58 @@
                             <form action="{{route('admin.product.updated', $data->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-xl-6">
-                                    <div class="mb-3">
-                                        <label for="ttd">Signature <span style='font-size:10px'>(PNG format only Max 1Mb)</span></label>
-                                        <br>
-                                            <img src="data:image/png;base64,{{ $data->image }}" alt="Signature Preview" class="img-thumbnail" id="gambar_preview" style="max-width: 150px;">
-                                        <br><br>
-                                        <input type="file" name="gambar" id="gambar" class="form-control">
-                                        <input type="hidden" name="gambar_base64" id="gambar_base64" value="{{ $data->image }}">
-                                        @if ($errors->has('ttd'))
-                                            <span class="text-danger">{{ $errors->first('ttd') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="product_code" class="form-label">Product Code</label>
-                                        <input type="text" name="product_code" id="product_code" value="{{ $data->product_code }}" class="form-control">
-                                        @if ($errors->has('product_code'))
-                                            <span class="text-danger">{{ $errors->first('product_code') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="price" class="form-label">Price</label>
-                                        <input type="text" name="price" id="price" value="{{ $data->price }}" class="form-control">
-                                        @if ($errors->has('price'))
-                                            <span class="text-danger">{{ $errors->first('price') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="discount" class="form-label">Discount</label>
-                                        <input type="text" name="discount" id="discount" value="{{ $data->discount }}" class="form-control">
-                                        @if ($errors->has('discount'))
-                                            <span class="text-danger">{{ $errors->first('discount') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="product_name" class="form-label">Product Name</label>
-                                        <input type="text" name="product_name" id="product_name" value="{{ $data->product_name }}" class="form-control">
-                                        @if ($errors->has('product_name'))
-                                            <span class="text-danger">{{ $errors->first('product_name') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="currency" class="form-label">Currency</label>
-                                        <input type="text" name="currency" id="currency" value="{{ $data->currency }}" class="form-control">
-                                        @if ($errors->has('currency'))
-                                            <span class="text-danger">{{ $errors->first('currency') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="dimension" class="form-label">Dimension</label>
-                                        <input type="text" name="dimension" id="dimension" value="{{ $data->dimension }}" class="form-control">
-                                        @if ($errors->has('dimension'))
-                                            <span class="text-danger">{{ $errors->first('dimension') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="Unit" class="form-label">Unit</label>
-                                        <input type="text" name="unit" id="unit" value="{{ $data->unit }}" class="form-control">
-                                        @if ($errors->has('unit'))
-                                            <span class="text-danger">{{ $errors->first('unit') }}</span>
-                                        @endif
-                                    </div>
+                                <div class="col-md-6">
+                                    <label for="product_name" class="form-label">Product Name</label>
+                                    <input type="text" name="product_name" id="product_name" value="{{ $data->product_name }}" class="form-control">
+                                    @if ($errors->has('product_name'))
+                                        <span class="text-danger">{{ $errors->first('product_name') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="number" name="price" id="price" value="{{ $data->price }}" class="form-control">
+                                    @if ($errors->has('price'))
+                                        <span class="text-danger">{{ $errors->first('price') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="discount" class="form-label">Discount <span style='font-size:10px'>(only number not using %)</span></label>
+                                    <input type="number" name="discount" id="discount" value="{{ $data->discount }}" class="form-control">
+                                    @if ($errors->has('discount'))
+                                        <span class="text-danger">{{ $errors->first('discount') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="currency" class="form-label">Currency</label>
+                                    <input type="text" name="currency" id="currency" value="{{ $data->currency }}" class="form-control" maxlength="5" oninput="this.value = this.value.toUpperCase()">
+                                    @if ($errors->has('currency'))
+                                        <span class="text-danger">{{ $errors->first('currency') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="dimension" class="form-label">Dimension</label>
+                                    <input type="text" name="dimension" id="dimension" value="{{ $data->dimension }}" class="form-control">
+                                    @if ($errors->has('dimension'))
+                                        <span class="text-danger">{{ $errors->first('dimension') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="Unit" class="form-label">Unit</label>
+                                    <input type="text" name="unit" id="unit" value="{{ $data->unit }}" class="form-control">
+                                    @if ($errors->has('unit'))
+                                        <span class="text-danger">{{ $errors->first('unit') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="gambar">Image<span style='font-size:10px'>(Max 1Mb)</span></label>
+                                    <br>
+                                        <img src="data:image/png;base64,{{ $data->image }}" alt="Image Preview" class="img-thumbnail" id="gambar_preview" style="max-width: 150px;">
+                                    <br><br>
+                                    <input type="file" name="gambar" id="gambar" class="form-control">
+                                    <input type="hidden" name="gambar_base64" id="gambar_base64" value="{{ $data->image }}">
+                                    @if ($errors->has('gambar'))
+                                        <span class="text-danger">{{ $errors->first('gambar') }}</span>
+                                    @endif
                                 </div>
                             </div>
                                     

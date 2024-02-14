@@ -13,10 +13,13 @@
                 <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
-                </a>
+            <li class="nav-item">   
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link" style="background:none; border:none; cursor:pointer;">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                    </button>
+                </form> 
             </li>
         </ul>
     </nav>

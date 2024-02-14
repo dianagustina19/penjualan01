@@ -12,7 +12,7 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = TransactionHeader::with(['user','detail'])
+            $data = TransactionHeader::with(['username','detail'])
             ->when($request->filled('daterange'), function ($query) use ($request) {
                 list($start_date, $end_date) = explode(' - ', $request->input('daterange'));
                 $query->whereBetween('date', [$start_date, $end_date]);
@@ -23,13 +23,14 @@ class ReportController extends Controller
             ->addColumn('document_code', function($data){
                 return $data->document_code."-".$data->document_number;
             })
-            ->addColumn('user', function($data){
-                return $data->user->email ?? '';
+            ->addColumn('userorg', function($data){
+                return $data->username->name ?? '';
             })
             ->addColumn('item', function($data){
-                return $data->detail?? '';
+                $products = $data->detail->pluck('product_name')->implode('<br>');
+                return $products;
             })
-            ->rawColumns(['user','item'])
+            ->rawColumns(['userorg','item','document_code'])
             ->make(true);                    
         }
 
@@ -38,7 +39,7 @@ class ReportController extends Controller
 
     public function export(Request $request)
     {
-        $data = TransactionHeader::with(['user','detail'])
+        $data = TransactionHeader::with(['username','detail'])
                 ->when($request->filled('daterange'), function ($query) use ($request) {
                     list($start_date, $end_date) = explode(' - ', $request->input('daterange'));
                     $query->whereBetween('date', [$start_date, $end_date]);

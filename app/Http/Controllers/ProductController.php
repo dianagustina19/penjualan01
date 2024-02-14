@@ -23,18 +23,16 @@ class ProductController extends Controller
     {
         $request->validate([
             'gambar_base64' => 'required',
-            'product_code'  => 'required',
             'product_name'  => 'required',
             'price'         => 'required',
             'currency'      => 'required',
-            'discount'      => 'required',
             'dimension'     => 'required',
             'unit'          => 'required'
         ]);
 
         $data                   = New Product();
         $data->image            = $request->input('gambar_base64');
-        $data->product_code     = $request->input('product_code');
+        $data->product_code     = substr($request->input('product_name') ,0,3).$request->input('unit');
         $data->product_name     = $request->input('product_name');
         $data->price            = $request->input('price');
         $data->currency         = $request->input('currency');
@@ -58,18 +56,16 @@ class ProductController extends Controller
     {
         $request->validate([
             'gambar_base64' => 'required',
-            'product_code'  => 'required',
             'product_name'  => 'required',
             'price'         => 'required',
             'currency'      => 'required',
-            'discount'      => 'required',
             'dimension'     => 'required',
             'unit'          => 'required'
         ]);
 
         $data                   = Product::find($request->id);
         $data->image            = $request->input('gambar_base64');
-        $data->product_code     = $request->input('product_code');
+        $data->product_code     = substr($request->input('product_name') ,0,3).$request->input('unit');
         $data->product_name     = $request->input('product_name');
         $data->price            = $request->input('price');
         $data->currency         = $request->input('currency');

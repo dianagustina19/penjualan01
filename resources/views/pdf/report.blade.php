@@ -7,6 +7,7 @@
             }
             .table-header{
                 border-collapse: collapse;
+                border: 1px solid black;
                 width: 100%;
             }
 
@@ -15,50 +16,10 @@
                 width: 100%;
             }
 
-            .table-body th{
-                /* background-color: #4F71BE; */
-                /* color: white; */
-                font-size: 12px
-            }
-
             .table-body td, .table-body th{
                 border: 1px solid black;
                 padding: 5px;
                 font-size: 11px
-            }
-            
-            .font-size-11{
-                font-size: 11px;
-            }
-
-            .text-center {
-                text-align: center;
-            }
-
-            .logo {
-                width: 100px;
-            }
-
-            .text-container {
-                flex-grow: 1;
-                text-align: center;
-                text-transform: uppercase;
-                padding-left: 300px; /* Sesuaikan sesuai kebutuhan */
-            }
-
-            .logo-container {
-                margin-right: 100px; /* Tambahkan margin kanan sesuai kebutuhan */
-            }
-
-            .header {
-                font-size: 18px;
-                font-weight: bold;
-            }
-
-            .project-name {
-                font-size: 15px;
-                font-weight: bold;
-                color: black;
             }
         </style>
     </head>
@@ -74,15 +35,22 @@
                     <th>Item</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-body">
                 @foreach($data as $data)
                 <tr>
                     <td>{{ $data->document_code}}-{{$data->document_number}}</td>
-                    <td>{{ $data->user->name ?? '-'}}</td>
-                    <td>{{ $data->total}}</td>
-                    <td>{{$data->date}}</td>
-                    <td>{{$data->detail ?? '-'}}</td>
-               
+                    <td>{{ $data->username->name ?? '-'}}</td>
+                    <td>Rp. {{ number_format($data->total) }}</td>
+                    <td>{{ $data->date }}</td>
+                    <td>
+                        @if($data->detail->isNotEmpty())
+                            @foreach($data->detail as $detail)
+                                {{ $detail->product_name }}<br>
+                            @endforeach
+                        @else
+                            -
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

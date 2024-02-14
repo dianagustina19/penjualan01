@@ -11,13 +11,13 @@ class TransactionHeader extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function user()
+    public function username()
     {
-        return $this->hasMany(User::class,'id','user_id');
+        return $this->hasOne(User::class,'id','user');
     }
 
     public function detail()
     {
-        return $this->hasMany(TransactionDetail::class, 'id','document_number');
-    }
+        return $this->hasMany(TransactionDetail::class, 'document_number', 'document_number');
+    }    
 }
