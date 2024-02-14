@@ -40,6 +40,7 @@ Auth::routes();
     //report
     Route::prefix('report')->group(function () {
         Route::get('/', [ReportController::class, 'index'])->name('admin.report.index');
+        Route::get('/export', [ReportController::class, 'export'])->name('admin.report.export');
     });
 
     //user

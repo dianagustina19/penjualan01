@@ -7,7 +7,7 @@
  
     <div class="f1-steps">
         <div class="f1-progress">
-            <div class="f1-progress-line" data-now-value="25" data-number-of-steps="4" style="width: 25%;"></div>
+            <div class="f1-progress-line" data-now-value="30" data-number-of-steps="3" style="width: 30%;"></div>
         </div>
         <div class="f1-step">
             <div class="f1-step-icon"><i class="fa fa-user"></i></div>
@@ -15,7 +15,7 @@
                 <p>Product</p>
             </a>
         </div>
-        <div class="f1-step">
+        <div class="f1-step {{ Request::is('chart') ? 'active' : '' }}">
             <div class="f1-step-icon"><i class="fa fa-home"></i></div>
             <a href="{{ route('step2') }}">
                 <p>Cart</p>

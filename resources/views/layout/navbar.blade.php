@@ -6,22 +6,13 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     
                 </ul>
-                <form class="d-flex">
                 <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item">
-                                <i class="nav-icon fas fa-sign-out-alt"></i>
-                                <p style="color:red">
-                                    Logout
-                                </p>
-                            </button>
-                            <!-- <button class="btn btn-outline-dark" type="submit">
-                                <i class="bi-cart-fill me-1"></i>
-                                Logout
-                            </button> -->
-                        </form> 
-                   
-                </form>
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form> 
             </div>
         </div>
     </nav>

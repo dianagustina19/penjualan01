@@ -7,6 +7,7 @@ use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
 use App\Models\Product;
 use Carbon\Carbon;
+use Auth;
 
 class MasterController extends Controller
 {
@@ -37,8 +38,8 @@ class MasterController extends Controller
             $data->save();
         }else{
             $save = New TransactionDetail;
-            $save->document_code    = 'hjh';
-            $save->document_number  = 'jhj';
+            $save->document_code    = 'TRX';
+            $save->document_number  = '-';
             $save->image            = $product->image;
             $save->user_id          = $request->name;
             $save->product_code     = $product->product_code;
@@ -53,7 +54,6 @@ class MasterController extends Controller
             }
             $save->currency         = $product->currency;
             $save->unit             = $product->unit;
-            $save->discount         = $product->discount;
             $save->save();
         }
 
@@ -67,7 +67,7 @@ class MasterController extends Controller
 
     public function step2()
     {
-        $chart = TransactionDetail::where('user_id',1)
+        $chart = TransactionDetail::where('user_id', Auth::user()->id)
                 ->where('status',0)
                 ->get();   
 
@@ -85,11 +85,27 @@ class MasterController extends Controller
         foreach ($chart as $item) {
             $total += $item->subtotal;
         }
-     
-        $updated = TransactionDetail::whereIn('id', $chart)->update(['status' => 1]);
+
+        $code = now()->format('Y') . '/' . now()->format('m') . '/';
+        $existingNumbers = TransactionHeader::where('document_number', 'LIKE', '%' . $code . '%')->pluck('document_number')->toArray();
+
+        $maxNumber = 0;
+        foreach ($existingNumbers as $existingNumber) {
+            $number = intval(substr($existingNumber, -3));
+            $maxNumber = max($maxNumber, $number);
+        }
+
+        $newNumber = str_pad($maxNumber + 1, 3, '0', STR_PAD_LEFT);
+
+        $new = $code . $newNumber;
+
+        foreach ($chart as $entry) {
+            $entry->update(['status' => 1, 'document_number' => $new]);
+        }        
+        
         $save = New TransactionHeader;
-        $save->document_code    = 'hjh';
-        $save->document_number  = 'jhj';
+        $save->document_code    = 'TRX';
+        $save->document_number  = $new;
         $save->user             = $request->name;
         $save->total            = $total;
         $save->date             = Carbon::now();

@@ -44,7 +44,7 @@
                 <div class="bg-primary text-white p-3 rounded text-center d-inline-block">
                     <form action="{{ route('confirm') }}" method="POST" >
                         @csrf
-                        <input type="hidden" name="name" value="1">
+                        <input type="hidden" name="name" value="{{Auth::user()->id}}">
                         <button class="btn btn-primary" type="submit">Confirm</button>
                     </form>
                 </div>

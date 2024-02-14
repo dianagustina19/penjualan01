@@ -32,7 +32,7 @@
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $data->id }}">
                                     <input type="hidden" name="code" value="{{ $data->product_code }}">
-                                    <input type="hidden" name="name" value="1">
+                                    <input type="hidden" name="name" value="{{Auth::user()->id}}">
                                     <button class="btn btn-primary" type="submit">Buy</button>
                                 </form>
                             </div>
