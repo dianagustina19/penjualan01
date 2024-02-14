@@ -17,7 +17,7 @@
                             <div>
                                 <h5>
                                 @if($data->discount != null)
-                                    <s>Rp. {{ number_format($data->price)}}</s> <br>
+                                    <s>Rp. {{ number_format($data->price)}}</s> <span class="badge bg-danger">Diskon {{ $item->discount }}%<br>
                                     Rp. {{ number_format($data->price - ($data->price * $data->discount / 100)) }}
                                 @else
                                     Rp. {{ number_format($data->price) }}

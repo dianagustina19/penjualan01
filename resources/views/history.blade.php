@@ -3,7 +3,7 @@
 @section('content')  
    <div class="container px-4 px-lg-5 mt-5">
             @php
-                $cek = count(list);
+                $cek = count($list);
             @endphp
             @if($cek!=0)
             @foreach($list as $item)
