@@ -128,7 +128,7 @@
                     title: 'Format File Tidak Valid',
                     text: 'Hanya file Gambar yang diizinkan.',
                 });
-                fileInput.value = ""; // Reset input jika file tidak valid
+                fileInput.value = "";
                 return;
             }
 

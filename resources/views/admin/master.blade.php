@@ -91,6 +91,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     @yield('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jQuery -->
     <!-- <script src="{{ asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script> -->
     <!-- jQuery UI 1.11.4 -->

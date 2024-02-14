@@ -121,4 +121,13 @@ class MasterController extends Controller
 
         return redirect(route('step2'));
     }
+
+    public function history(Request $request)
+    {
+        $list = TransactionDetail::where('user_id', Auth::user()->id)
+                ->where('status',1)
+                ->get();   
+
+        return view('history', compact('list'));
+    }
 }

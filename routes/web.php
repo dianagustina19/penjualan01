@@ -23,7 +23,7 @@ Route::get('/', function () {
 Auth::routes();
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::middleware(['auth'])->group(function () {
+Route::middleware('role:1')->group(function () {
     //admin
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
@@ -42,7 +42,9 @@ Auth::routes();
         Route::get('/', [ReportController::class, 'index'])->name('admin.report.index');
         Route::get('/export', [ReportController::class, 'export'])->name('admin.report.export');
     });
+});
 
+Route::middleware('role:0')->group(function () {
     //user
     Route::get('/list', [MasterController::class, 'index'])->name('list');
     Route::get('/detail/{id}', [MasterController::class, 'detail'])->name('detail');
@@ -50,5 +52,6 @@ Auth::routes();
     Route::get('/step2', [MasterController::class, 'step2'])->name('step2');
     Route::post('/confirm', [MasterController::class, 'confirm'])->name('confirm');
     Route::get('/delProduct/{id}', [MasterController::class, 'delete'])->name('delProduct');
+    Route::get('/history', [MasterController::class, 'history'])->name('history');
 });
 

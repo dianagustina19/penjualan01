@@ -11,12 +11,10 @@
             @foreach($chart as $item)
                 <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-1 row-cols-xl-1 justify-content-center">
                     <div class="col mb-5">
-                        <div class="card h-100 d-flex flex-row position-relative"> <!-- Tambahkan kelas position-relative -->
-                            <!-- Product image-->
+                        <div class="card h-100 d-flex flex-row position-relative">
                             <img class="card-img-top flex-grow-1" src="data:image/png;base64,{{ $item->image }}" style="max-width: 200px; max-height: 200px;">
-                            <!-- Product details-->
                             <div class="card-body p-4">
-                                <div class="d-flex flex-column justify-content-between align-items-start"> <!-- Menambahkan align-items-start -->
+                                <div class="d-flex flex-column justify-content-between align-items-start">
                                     <h5 class="fw-bolder">{{ $item->product_name }}</h5>
                                     <h6>{{ $item->quantity }} {{ $item->unit}}</h6>
                                     <div>
